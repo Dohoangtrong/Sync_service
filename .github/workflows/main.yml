@@ -20,11 +20,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }}
           
       - name: publish
-        run: npm publish --access public --otp=400642
-      # - name: Install dependencies
-      #   run: npm install
-
-      # - name: Build package
-      #   run: npm run build
+        run: npm publish --access public --otp=807851
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }}
