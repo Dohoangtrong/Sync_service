@@ -1,6 +1,6 @@
 {
     "name": "sync-libs",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "description": "npm publish package",
     "main": "dist/index.js",
     "module": "module",
@@ -26,7 +26,7 @@
         "reflect-metadata": "^0.1.13"
     },
     "scripts": {
-        "build": "tsc"
+        "build": "webpack"
     },
     "repository": {
         "type": "git",
