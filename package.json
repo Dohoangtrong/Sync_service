@@ -23,6 +23,7 @@
         "cors": "^2.8.5",
         "express": "^4.19.2",
         "ioredis": "^5.4.1",
+        "path": "^0.12.7",
         "reflect-metadata": "^0.1.13"
     },
     "scripts": {
@@ -36,5 +37,4 @@
         "url": "https://github.com/Dohoangtrong/Sync_service/issues"
     },
     "homepage": "https://github.com/Dohoangtrong/Sync_service#readme"
-  }
-  
+}
