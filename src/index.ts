@@ -1,1 +1,1 @@
-export { CODE_HTTP } from "./constants/Response"
+export { HttpStatusCode } from "./constants/Response"
