@@ -52,12 +52,12 @@ function getTimestamp(): string {
     return new Date().toISOString();
 }
 
-export class DefaultLogger{
-    name : string
+export class Logger{
+    // log level display 
+    // debug < info < warn < error < fatal
     logLevel : LogLevel
 
-    constructor(name, logLevel = LogLevel.debug ) {
-        this.name = name;
+    constructor(logLevel = LogLevel.debug ) {
         this.logLevel = logLevel;
     }
 
@@ -89,8 +89,8 @@ export class DefaultLogger{
             .join(' ');
     }
 
-    get prefix() {
-        return this.logLevel ? titleBold(LogLevel[this.logLevel].toUpperCase()) : ``;
+    prefix(title) {
+        return this.logLevel ? titleBold(title) : ``;
     }
 
     // log method
@@ -121,7 +121,7 @@ export class DefaultLogger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix}: ⚠️ ${warnColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${this.prefix("WARN")}: ⚠️  ${warnColor(message)}`;
 
         if (process?.stderr?.write) {
             process.stderr.write(fullMessage + '\n');
@@ -140,7 +140,7 @@ export class DefaultLogger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix}: 💡 ${infoColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${this.prefix("INFO")}: 💡 ${infoColor(message)}`;
 
         if (typeof process?.stderr?.write === 'function') {
             process.stderr.write(fullMessage + '\n');
@@ -160,7 +160,7 @@ export class DefaultLogger{
             trim: false,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix}: 💥 ${errorColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${this.prefix("ERROR")}: 💥 ${errorColor(message)}`;
 
         if (typeof process?.stderr?.write === 'function') {
             process.stderr.write(fullMessage + '\n');
@@ -179,7 +179,7 @@ export class DefaultLogger{
                 args,
                 trim: false,
             });
-            const fullMessage = `[${getTimestamp()}] ${this.prefix}: 🐛 ${errorColor(message)}`;
+            const fullMessage = `[${getTimestamp()}] ${this.prefix("DEBUG")}: 🐛 ${errorColor(message)}`;
             if (typeof process?.stderr?.write === 'function') {
                 process.stderr.write(fullMessage + '\n');
                 return;

@@ -1,2 +1,2 @@
 export { HttpStatusCode } from "./constants/Response"
-export { DefaultLogger, LogLevel } from "./Logger"
+export { Logger, LogLevel } from "./Logger"
