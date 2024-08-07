@@ -90,7 +90,7 @@ export class DefaultLogger{
     }
 
     get prefix() {
-        return this.logLevel ? titleBold(LogLevel[this.logLevel]) : ``;
+        return this.logLevel ? titleBold(LogLevel[this.logLevel]).toUpperCase() + ": " : ``;
     }
 
     // log method
