@@ -90,7 +90,7 @@ export class DefaultLogger{
     }
 
     get prefix() {
-        return this.logLevel ? titleBold(LogLevel[this.logLevel]).toUpperCase() + ": " : ``;
+        return this.logLevel ? titleBold(LogLevel[this.logLevel].toUpperCase()) : ``;
     }
 
     // log method
@@ -103,7 +103,7 @@ export class DefaultLogger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix} ${message}`;
+        const fullMessage = `[${getTimestamp()}] ${this.prefix}: ${message}`;
 
         if (process?.stderr?.write(fullMessage + '\n')) {
             return;
@@ -121,7 +121,7 @@ export class DefaultLogger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix} ⚠️ ${warnColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${this.prefix}: ⚠️ ${warnColor(message)}`;
 
         if (process?.stderr?.write) {
             process.stderr.write(fullMessage + '\n');
@@ -140,7 +140,7 @@ export class DefaultLogger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix} 💡 ${infoColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${this.prefix}: 💡 ${infoColor(message)}`;
 
         if (typeof process?.stderr?.write === 'function') {
             process.stderr.write(fullMessage + '\n');
@@ -160,7 +160,7 @@ export class DefaultLogger{
             trim: false,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix} 💥 ${errorColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${this.prefix}: 💥 ${errorColor(message)}`;
 
         if (typeof process?.stderr?.write === 'function') {
             process.stderr.write(fullMessage + '\n');
