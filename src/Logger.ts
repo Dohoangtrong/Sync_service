@@ -89,10 +89,6 @@ export class Logger{
             .join(' ');
     }
 
-    prefix(title) {
-        return this.logLevel ? titleBold(title) : ``;
-    }
-
     // log method
     log(...args: any[]): void {
         if (this.logLevel > LogLevel.info) {
@@ -121,7 +117,7 @@ export class Logger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix("WARN")}: ⚠️  ${warnColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${titleBold("WARN")}: ⚠️  ${warnColor(message)}`;
 
         if (process?.stderr?.write) {
             process.stderr.write(fullMessage + '\n');
@@ -140,7 +136,7 @@ export class Logger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix("INFO")}: 💡 ${infoColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${titleBold("INFO")}: 💡 ${infoColor(message)}`;
 
         if (typeof process?.stderr?.write === 'function') {
             process.stderr.write(fullMessage + '\n');
@@ -160,7 +156,7 @@ export class Logger{
             trim: false,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix("ERROR")}: 💥 ${errorColor(message)}`;
+        const fullMessage = `[${getTimestamp()}] ${titleBold("ERROR")}: 💥 ${errorColor(message)}`;
 
         if (typeof process?.stderr?.write === 'function') {
             process.stderr.write(fullMessage + '\n');
@@ -179,7 +175,7 @@ export class Logger{
                 args,
                 trim: false,
             });
-            const fullMessage = `[${getTimestamp()}] ${this.prefix("DEBUG")}: 🐛 ${errorColor(message)}`;
+            const fullMessage = `[${getTimestamp()}] ${titleBold("DEBUG")}: 🐛 ${errorColor(message)}`;
             if (typeof process?.stderr?.write === 'function') {
                 process.stderr.write(fullMessage + '\n');
                 return;

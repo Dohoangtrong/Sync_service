@@ -20,6 +20,6 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }}
           
       - name: publish
-        run: npm publish --access public --otp=995183
+        run: npm publish --access public --otp=339185
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_SECRET_KEY }}
