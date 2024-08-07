@@ -103,7 +103,7 @@ export class DefaultLogger{
             args,
         });
 
-        const fullMessage = `[${getTimestamp()}] ${this.prefix}: ${message}`;
+        const fullMessage = `[${getTimestamp()}] ${message}`;
 
         if (process?.stderr?.write(fullMessage + '\n')) {
             return;
@@ -168,6 +168,24 @@ export class DefaultLogger{
         }
         
         console.error(fullMessage);
+    }
+    // debug method
+    debug(...args: any[]): void{
+        if (this.logLevel > LogLevel.debug) {
+            return noop();
+        }
+        if (this.isDebug) {
+            const message = this.getLoggerMessage({
+                args,
+                trim: false,
+            });
+            const fullMessage = `[${getTimestamp()}] ${this.prefix}: 🐛 ${errorColor(message)}`;
+            if (typeof process?.stderr?.write === 'function') {
+                process.stderr.write(fullMessage + '\n');
+                return;
+            }
+            console.debug(fullMessage);
+        }
     }
 }
 
