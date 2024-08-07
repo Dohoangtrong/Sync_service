@@ -76,7 +76,7 @@ export class DefaultLogger{
                     if (trim && arg.length > 100) {
                         return (
                             arg.slice(0, 100) +
-                            '...' +
+                            '...\n' +
                             '<Message is too long. Enable DEBUG=1 to see the full message.>'
                         );
                     }
@@ -90,7 +90,7 @@ export class DefaultLogger{
     }
 
     get prefix() {
-        return this.logLevel ? titleBold(this.logLevel[this.logLevel]) : ``;
+        return this.logLevel ? titleBold(LogLevel[this.logLevel]) : ``;
     }
 
     // log method
