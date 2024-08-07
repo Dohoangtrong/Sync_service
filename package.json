@@ -1,6 +1,6 @@
 {
     "name": "sync-libs",
-    "version": "0.0.6",
+    "version": "0.0.7",
     "description": "npm publish package",
     "main": "dist/index.js",
     "module": "module",

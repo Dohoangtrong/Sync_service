@@ -1,2 +1,2 @@
 export { HttpStatusCode } from "./constants/Response"
-export * as Z from "./CustomAxios"
+export { DefaultLogger } from "./Logger"
