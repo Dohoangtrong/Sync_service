@@ -63,8 +63,7 @@ export class DefaultLogger{
 
     get isDebug() {
         if (this.logLevel == LogLevel.debug ) {
-            return (
-                this.name.includes( "DEBUG" ));
+            return true;
         }
         return false;
     }
@@ -91,7 +90,7 @@ export class DefaultLogger{
     }
 
     get prefix() {
-        return this.name ? titleBold(this.name) : ``;
+        return this.logLevel ? titleBold(this.logLevel[this.logLevel]) : ``;
     }
 
     // log method
