@@ -1,5 +1,5 @@
 import RedisClient from "./entity/RedisEntity";
-import * as bcrypt from 'bcrypt';
+import * as crypto from "crypto";
 import { toLowerCaseValues } from "./helpers/JsonUtils";
 
 export const redis = RedisClient.getInstance({
@@ -13,40 +13,39 @@ export const redis = RedisClient.getInstance({
 export const isDataLocked = async(
     data: any,
     expire: number = 45,
-    secret_key?: string | ""
+    secret_key: string = ""
 ):Promise<any> => {
     const convertData = toLowerCaseValues(data);
 
-    const dataToHash = secret_key ? JSON.stringify(convertData) + secret_key : JSON.stringify(convertData);
+    const signature = crypto
+      .createHmac("sha256", secret_key as string)
+      .update(JSON.stringify(data))
+      .digest("hex");
 
-    const saltRounds = 10;
-    const res = await bcrypt.hash(dataToHash, saltRounds);
-
-    const isLocked = await redis.get(res);
+    const isLocked = await redis.get(signature);
 
     if (isLocked) {
         // data is processing
         return true;
     }
-    await redis.set(res, 'locked', 'EX', expire);
+    await redis.set(signature, 'locked', 'EX', expire);
     return false
 }
 
 export const delLocked = async(
     data: any,
-    secret_key?: string | ""
+    secret_key: string = ""
 ):Promise<void> => {
     const convertData = toLowerCaseValues(data);
+    const signature = crypto
+      .createHmac("sha256", secret_key as string)
+      .update(JSON.stringify(data))
+      .digest("hex");
 
-    const dataToHash = secret_key ? JSON.stringify(convertData) + secret_key : JSON.stringify(convertData);
-
-    const saltRounds = 10;
-    const res = await bcrypt.hash(dataToHash, saltRounds);
-
-    const ok = await redis.get(res);
+    const ok = await redis.get(signature);
 
     if (ok) {
-        await redis.del(res);
+        await redis.del(signature);
     }
 }
 

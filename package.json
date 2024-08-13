@@ -1,6 +1,6 @@
 {
     "name": "sync-libs",
-    "version": "0.0.16",
+    "version": "0.0.17",
     "description": "npm publish package",
     "main": "dist/index.js",
     "module": "module",
@@ -20,8 +20,8 @@
     },
     "dependencies": {
         "amqplib": "^0.10.4",
-        "bcrypt": "^5.1.1",
         "cors": "^2.8.5",
+        "crypto": "^1.0.1",
         "express": "^4.19.2",
         "ioredis": "^5.4.1",
         "reflect-metadata": "^0.1.13"
