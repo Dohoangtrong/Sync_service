@@ -2,17 +2,17 @@ import RedisClient from "./entity/RedisEntity";
 import * as bcrypt from 'bcrypt';
 import { toLowerCaseValues } from "./helpers/JsonUtils";
 
-export const redis = RedisClient.getInstance();
+export const redis = RedisClient.getInstance({
+    host: process.env.DB_REDIS_HOST,
+    port: Number(process.env.DB_REDIS_PORT), 
+    password: process.env.DB_REDIS_PASSWORD,
+    db: Number(process.env.DB_REDIS_DB),
+});
 
-// example 
-// const redis = RedisClient.getInstance({
-//     host: "10.0.0.1",
-//     db: 2
-// });
 
 export const isDataLocked = async(
     data: any,
-    expire: number | 45,
+    expire: number = 45,
     secret_key?: string | ""
 ):Promise<any> => {
     const convertData = toLowerCaseValues(data);
