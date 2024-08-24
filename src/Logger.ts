@@ -49,7 +49,9 @@ export enum LogLevel {
 const noop = (): void => { };
 
 function getTimestamp(): string {
-    return new Date().toISOString();
+    const now = new Date();
+    const timestamp = now.toTimeString().split(' ')[0];
+    return timestamp
 }
 
 export class Logger{
